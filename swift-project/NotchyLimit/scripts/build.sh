@@ -112,6 +112,8 @@ swiftc \
   "$SOURCES_DIR/UI/MenuBar/MenuBarController.swift" \
   "$SOURCES_DIR/UI/NotchWindowController.swift" \
   "$SOURCES_DIR/UI/Expanded/HeaderRow.swift" \
+  "$SOURCES_DIR/UI/Expanded/ProviderRingsRow.swift" \
+  "$SOURCES_DIR/UI/Expanded/UsageDetailList.swift" \
   "$SOURCES_DIR/UI/Expanded/SessionCard.swift" \
   "$SOURCES_DIR/UI/Expanded/PaceRow.swift" \
   "$SOURCES_DIR/UI/Expanded/WeeklyCard.swift" \

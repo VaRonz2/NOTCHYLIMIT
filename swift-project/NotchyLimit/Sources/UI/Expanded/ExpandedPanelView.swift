@@ -48,37 +48,15 @@ struct ExpandedPanelView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     HeaderRow(appState: appState, controller: controller)
 
-                    // Provider switcher — only shown when 2+ providers are active.
-                    if appState.isMultiProvider {
-                        ProviderSwitcherRow(appState: appState)
-                    }
-
-                    // Outage banner for the active provider, if any.
-                    if let incident = appState.activeIncident {
-                        IncidentBanner(providerName: appState.activeProviderId.displayName,
-                                       incident: incident)
-                    }
-
-                    SessionCard(appState: appState)
-                    PaceRow(appState: appState)
-
-                    // 7-day usage trend — appears once enough samples exist (#22).
-                    if appState.activeShowsPercentBar {
-                        Sparkline(appState: appState)
-                    }
-
-                    if let weekly = appState.latestSnapshot?.secondaryWindow {
-                        WeeklyCard(window: weekly)
-                    }
-                    if let weeklySonnet = appState.latestSnapshot?.tertiaryWindow {
-                        WeeklyCard(window: weeklySonnet,
-                                   title: "Weekly Sonnet",
-                                   subtitle: "Pro plan")
-                    }
+                    ProviderRingsRow(appState: appState)
+                    Rectangle()
+                        .fill(Color.white.opacity(0.08))
+                        .frame(height: 1)
+                    UsageDetailList(appState: appState)
 
                     Spacer(minLength: 0)
                 }
-                .padding(16)
+                .padding(14)
             }
             .frame(width: 380, height: 240)
             // Grows downward from the notch — anchored at top edge.

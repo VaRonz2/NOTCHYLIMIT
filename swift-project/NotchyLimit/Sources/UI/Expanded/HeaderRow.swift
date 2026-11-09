@@ -1,24 +1,12 @@
 import SwiftUI
 
-/// Slim single-line header: provider badge · sync status — settings gear.
-/// Mascot removed — the StatusRingView in SessionCard owns the visual identity.
+/// Slim single-line header: sync status — settings gear.
 struct HeaderRow: View {
     @ObservedObject var appState: AppState
     let controller: NotchWindowController
 
     var body: some View {
         HStack(spacing: 6) {
-            // Provider dot + name
-            Circle()
-                .fill(Theme.accentWarm)
-                .frame(width: 6, height: 6)
-            Text(appState.activeProviderId.displayName)
-                .font(.system(size: 11, weight: .semibold, design: .rounded))
-                .foregroundColor(Theme.textPrimary)
-
-            Text("·")
-                .foregroundColor(Theme.textSecondary.opacity(0.5))
-
             Text(syncSubtitle)
                 .font(.system(size: 11, design: .rounded))
                 .foregroundColor(Theme.textSecondary)
