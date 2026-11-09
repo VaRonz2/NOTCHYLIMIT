@@ -25,16 +25,18 @@ final class NotchWindowController: NSObject {
     // hardware) and only the lower "visible extension" is seen by the user.
     // This is identical to how the iOS Dynamic Island works.
     private var notchH: CGFloat { ScreenUtils.notchScreen().safeAreaInsets.top }
+    private let compactBaseWidth: CGFloat = 220
+    private let compactSideExtension: CGFloat = 20
     // Single provider in the notch — a steady, compact pill width.
     private var compactSize:  NSSize {
-        NSSize(width: 220, height: notchH + 22)
+        NSSize(width: compactBaseWidth + 2 * compactSideExtension, height: notchH + 22)
     }
-    private var expandedSize: NSSize { NSSize(width: 380, height: notchH + 300) }
+    private var expandedSize: NSSize { NSSize(width: 380, height: notchH + 240) }
 
     init(appState: AppState) {
         self.appState = appState
         self.panel = NSPanel(
-            contentRect: NSRect(origin: .zero, size: NSSize(width: 220, height: 30)),
+            contentRect: NSRect(origin: .zero, size: NSSize(width: compactBaseWidth + 2 * compactSideExtension, height: 30)),
             styleMask: [.borderless, .nonactivatingPanel],
             backing: .buffered,
             defer: false

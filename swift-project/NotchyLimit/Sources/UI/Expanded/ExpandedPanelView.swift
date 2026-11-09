@@ -2,9 +2,9 @@ import SwiftUI
 
 /// Expanded notch panel.
 ///
-/// Panel frame is `notchH + 300` tall, anchored at screen top.
+/// Panel frame is `notchH + 240` tall, anchored at screen top.
 /// The top `notchH` points are pure black and overlap the hardware notch.
-/// Everything visible lives in the lower 300 pt glass card.
+/// Everything visible lives in the lower 240 pt black card.
 ///
 /// Content reveal is delayed by 0.14 s so it fades in after the
 /// stretchy width animation settles (phase 1 of the frame morph).
@@ -13,19 +13,20 @@ struct ExpandedPanelView: View {
     let controller: NotchWindowController
     @State private var appeared = false
 
-    private var statusColor: Color { appState.sessionStatus.color }
     private var notchH: CGFloat    { ScreenUtils.notchScreen().safeAreaInsets.top }
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Black notch-overlap fill — blends with hardware above.
-            Color.black.frame(maxWidth: .infinity, maxHeight: .infinity)
+            // One continuous black shape from the screen top (inside the
+            // hardware notch) down to the rounded bottom edge — no square
+            // backing behind the rounded corners. Bottom radius 24 follows
+            // common notch apps (e.g. boring.notch opened: bottom 24).
+            NotchPillShape(topRadius: 0, bottomRadius: 24)
+                .fill(Color.black)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            // Glass card — the 300 pt visible portion below the notch.
+            // Content — the 240 pt visible portion below the notch.
             ZStack(alignment: .topTrailing) {
-                NotchGlassBackground(topRadius: 10, bottomRadius: 20, tintColor: statusColor)
-                    .shadow(color: statusColor.opacity(0.18), radius: 18, y: 6)
-                    .shadow(color: .black.opacity(0.55), radius: 28, y: 10)
 
                 // Pinned badge — appears when user has clicked to lock the panel open
                 if appState.notchState == .expandedPinned {
@@ -76,12 +77,10 @@ struct ExpandedPanelView: View {
                     }
 
                     Spacer(minLength: 0)
-                    ActionsRow(appState: appState, controller: controller)
-                    FooterRow()
                 }
                 .padding(16)
             }
-            .frame(width: 380, height: 300)
+            .frame(width: 380, height: 240)
             // Grows downward from the notch — anchored at top edge.
             .scaleEffect(appeared ? 1 : 0.90, anchor: .top)
             .opacity(appeared ? 1 : 0)

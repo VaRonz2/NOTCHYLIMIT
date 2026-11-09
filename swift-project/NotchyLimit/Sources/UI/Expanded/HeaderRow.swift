@@ -28,10 +28,11 @@ struct HeaderRow: View {
 
             Button { appState.showSettings = true } label: {
                 Image(systemName: "gearshape.fill")
-                    .font(.system(size: 11))
-                    .foregroundColor(Theme.textSecondary.opacity(0.6))
+                    .font(.system(size: 13))
+                    .foregroundColor(Theme.textSecondary.opacity(0.85))
             }
             .buttonStyle(.borderless)
+            .help("Settings")
         }
     }
 

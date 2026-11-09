@@ -12,6 +12,11 @@ struct SettingsView: View {
                         .font(Theme.displayFont)
                         .foregroundColor(Theme.textPrimary)
                     Spacer()
+                    Button {
+                        (NSApp.delegate as? AppDelegate)?.coordinator?.refreshNow()
+                    } label: {
+                        Label("Refresh", systemImage: "arrow.clockwise")
+                    }
                     Button("Done") { appState.showSettings = false }.keyboardShortcut(.return)
                 }
 
@@ -353,6 +358,16 @@ struct SettingsView: View {
             Button("Quit Notchy") { NSApplication.shared.terminate(nil) }
                 .buttonStyle(.bordered)
                 .foregroundColor(Theme.statusCritical)
+
+            HStack(spacing: 6) {
+                Text("v0.1.0")
+                    .font(.system(size: 9, weight: .medium, design: .monospaced))
+                    .foregroundColor(Theme.textSecondary)
+                Spacer()
+                Link("GitHub", destination: URL(string: "https://github.com/notchylimit/notchy-limit")!)
+                    .font(.system(size: 10))
+                    .foregroundColor(Theme.accentCool)
+            }
 
             Spacer()
         }

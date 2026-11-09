@@ -115,8 +115,6 @@ swiftc \
   "$SOURCES_DIR/UI/Expanded/SessionCard.swift" \
   "$SOURCES_DIR/UI/Expanded/PaceRow.swift" \
   "$SOURCES_DIR/UI/Expanded/WeeklyCard.swift" \
-  "$SOURCES_DIR/UI/Expanded/ActionsRow.swift" \
-  "$SOURCES_DIR/UI/Expanded/FooterRow.swift" \
   "$SOURCES_DIR/UI/Expanded/ProviderSwitcherRow.swift" \
   "$SOURCES_DIR/UI/Expanded/Sparkline.swift" \
   "$SOURCES_DIR/UI/Expanded/ExpandedPanelView.swift" \
